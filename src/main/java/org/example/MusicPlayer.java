@@ -1,21 +1,18 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
+    private Music music;
     private String name;
     private int volume;
 
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
+    public MusicPlayer(Music music) {
+        this.music = music;
     }
 
     public MusicPlayer() {}
 
-    public void setMusic(List<Music> musicList) {
-        this.musicList = musicList;
+    public void setMusic(Music music) {
+        this.music = music;
     }
 
     public String getName() {
@@ -35,8 +32,6 @@ public class MusicPlayer {
     }
 
     public void playMusic() {
-        for (Music music: musicList) {
-            System.out.println("Playing: " + music.getSong());
-        }
+        System.out.println("Playing: " + music.getSong());
     }
 }
