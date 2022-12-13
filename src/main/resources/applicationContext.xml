@@ -21,7 +21,9 @@
           class="org.example.AlternativeMusic">
     </bean>
 
-    <bean id="musicPlayer" class="org.example.MusicPlayer">
+    <bean id="musicPlayer"
+          class="org.example.MusicPlayer"
+          scope="prototype">
         <property name="music" >
             <list>
                 <ref bean="classicalMusicBean" />
