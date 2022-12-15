@@ -1,12 +1,16 @@
 package org.example;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Scope("prototype")
 public class ClassicalMusic implements Music {
 
 
@@ -15,13 +19,14 @@ public class ClassicalMusic implements Music {
 //    public static ClassicalMusic getClassicalMusic() {
 //        return new ClassicalMusic();
 //    }
-//    public void doInit() {
-//        System.out.println("Doing my initialization");
-//    }
-//
-//    public void doDestruction() {
-//        System.out.println("Doing my destruction");
-//    }
+    @PostConstruct
+    public void doInit() {
+        System.out.println("Doing my initialization");
+    }
+    @PreDestroy
+    public void doDestruction() {
+        System.out.println("Doing my destruction");
+    }
     @Override
     public String getSong() {
         return "Sonata";
