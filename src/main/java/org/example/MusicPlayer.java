@@ -1,20 +1,21 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Random;
 
-@Component
+import static org.example.MusicStyle.CLASSICAL;
+import static org.example.MusicStyle.ROCK;
+
+
 public class MusicPlayer {
     @Value("${musicPlayer.name}")
     private String name;
     @Value("${musicPlayer.volume}")
     private int volume;
-    private Music music1;
-    private Music music2;
+    private List<Music> styleList;
+
 
     public String getName() {
         return name;
@@ -24,23 +25,15 @@ public class MusicPlayer {
         return volume;
     }
 
-    @Autowired
-    public MusicPlayer(@Qualifier("rockMusic") Music music1, @Qualifier("classicalMusic") Music music2) {
-        this.music1 = music1;
-        this.music2 = music2;
+
+    public MusicPlayer(List<Music> styleLIst) {
+        this.styleList = styleLIst;
+
     }
 
-    public String playMusic(MusicStyle musicStyle) {
-        String song = "";
-        int numberOfSong = new Random().nextInt(3);
-        switch (musicStyle) {
-            case ROCK:
-                song = music1.getList().get(numberOfSong);
-                break;
-            case CLASSICAL:
-                song = music2.getList().get(numberOfSong);;
-                break;
-        }
-        return "Playing: " + song;
+    public String playMusic() {
+        Music musicStyle = styleList.get(new Random().nextInt(styleList.size()));
+        int numberOfSong = new Random().nextInt(musicStyle.getList().size());
+        return "Playing: " + musicStyle.getList().get(numberOfSong);
     }
 }
